@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李东醒 · 作品集</title>
+<style>
+/* === 新中式简约风格 === */
+:root {
+  --red: #8B1A1A;
+  --red-dark: #5C0E0E;
+  --gold: #C9A96E;
+  --gold-light: #E8D5B7;
+  --ink: #2C2C2C;
+  --ink-light: #555;
+  --cream: #F5F0E8;
+  --white: #FFFCF7;
+  --border: #D4C5B2;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: "PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height:1.8;
+  overflow-x:hidden;
+}
+
+/* === 顶部装饰 === */
+.top-ornament {
+  height:6px;
+  background: linear-gradient(90deg,transparent 0%,var(--red) 20%,var(--gold) 50%,var(--red) 80%,transparent 100%);
+}
+
+/* === Hero === */
+.hero {
+  text-align:center;
+  padding:80px 20px 60px;
+  position:relative;
+  background: linear-gradient(180deg,var(--white) 0%,var(--cream) 100%);
+}
+.hero::before {
+  content:'';
+  position:absolute;
+  top:30px; left:50%;
+  transform:translateX(-50%);
+  width:60px; height:60px;
+  border:1px solid var(--gold);
+  border-radius:50%;
+  opacity:.4;
+}
+.hero::after {
+  content:'';
+  position:absolute;
+  top:40px; left:50%;
+  transform:translateX(-50%);
+  width:40px; height:40px;
+  border:1px dashed var(--gold-light);
+  border-radius:50%;
+  opacity:.5;
+}
+.hero h1 {
+  font-size:42px;
+  font-weight:300;
+  letter-spacing:12px;
+  color:var(--red-dark);
+  margin-bottom:12px;
+  position:relative;
+  z-index:1;
+}
+.hero .subtitle {
+  font-size:15px;
+  color:var(--ink-light);
+  letter-spacing:6px;
+  position:relative;
+  z-index:1;
+}
+.hero .divider {
+  width:80px; height:1px;
+  background:var(--gold);
+  margin:24px auto;
+  position:relative;
+  z-index:1;
+}
+.hero .brief {
+  font-size:13px;
+  color:var(--ink-light);
+  letter-spacing:3px;
+  position:relative;
+  z-index:1;
+}
+
+/* === 章节标题 === */
+.section {
+  max-width:960px;
+  margin:0 auto;
+  padding:60px 20px;
+}
+.section-header {
+  text-align:center;
+  margin-bottom:50px;
+  position:relative;
+}
+.section-header .cn-title {
+  font-size:28px;
+  font-weight:400;
+  letter-spacing:8px;
+  color:var(--red-dark);
+}
+.section-header .en-title {
+  font-size:12px;
+  color:var(--gold);
+  letter-spacing:4px;
+  margin-top:6px;
+  text-transform:uppercase;
+}
+.section-header::after {
+  content:'';
+  display:block;
+  width:40px; height:2px;
+  background:var(--gold);
+  margin:18px auto 0;
+}
+
+/* === 作品卡片 === */
+.work-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  margin-bottom:50px;
+  overflow:hidden;
+  transition:box-shadow .3s;
+}
+.work-card:hover {
+  box-shadow:0 8px 40px rgba(139,26,26,.06);
+}
+.work-card-header {
+  padding:30px 36px 0;
+}
+.work-card-header .work-num {
+  font-size:11px;
+  color:var(--gold);
+  letter-spacing:4px;
+}
+.work-card-header h2 {
+  font-size:22px;
+  font-weight:400;
+  color:var(--ink);
+  letter-spacing:4px;
+  margin:6px 0 4px;
+}
+.work-card-header .work-tag {
+  display:inline-block;
+  font-size:11px;
+  color:var(--red);
+  border:1px solid var(--red);
+  padding:2px 12px;
+  letter-spacing:2px;
+  margin-right:8px;
+}
+.work-card-header .work-meta {
+  font-size:12px;
+  color:var(--ink-light);
+  margin-top:8px;
+  letter-spacing:1px;
+}
+.work-desc {
+  padding:16px 36px 0;
+  font-size:13px;
+  color:var(--ink-light);
+  letter-spacing:1px;
+  line-height:2;
+}
+
+/* === 图片画廊 === */
+.gallery {
+  padding:20px 36px 30px;
+}
+.gallery-grid {
+  display:grid;
+  gap:12px;
+}
+.gallery-grid.cols2 { grid-template-columns:repeat(2,1fr); }
+.gallery-grid.cols3 { grid-template-columns:repeat(3,1fr); }
+.gallery-grid.cols4 { grid-template-columns:repeat(4,1fr); }
+.gallery-item {
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--border);
+  cursor:pointer;
+  aspect-ratio: 4/3;
+  background:#f0ede8;
+}
+.gallery-item img {
+  width:100%; height:100%;
+  object-fit:cover;
+  transition:transform .4s;
+}
+.gallery-item:hover img { transform:scale(1.05); }
+.gallery-item .caption {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  background:linear-gradient(transparent,rgba(0,0,0,.6));
+  color:white;
+  font-size:11px;
+  letter-spacing:2px;
+  padding:20px 12px 8px;
+  opacity:0;
+  transition:opacity .3s;
+}
+.gallery-item:hover .caption { opacity:1; }
+
+.gallery-item.fullwidth {
+  grid-column:1/-1;
+  aspect-ratio:16/7;
+}
+
+/* === 视频区 === */
+.video-wrapper {
+  padding:20px 36px 30px;
+}
+.video-wrapper video {
+  width:100%;
+  max-height:500px;
+  background:#000;
+  border:1px solid var(--border);
+}
+
+/* === QR 码区 === */
+.qr-section {
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:0 36px 30px;
+  border-top:1px dashed var(--border);
+  margin:0 36px;
+  padding-top:24px;
+  padding-bottom:30px;
+}
+.qr-code {
+  flex-shrink:0;
+  width:100px; height:100px;
+  border:1px solid var(--border);
+  padding:4px;
+  background:white;
+}
+.qr-code img { width:100%; height:100%; }
+.qr-label { flex:1; }
+.qr-label .qr-title {
+  font-size:13px;
+  letter-spacing:2px;
+  color:var(--ink);
+}
+.qr-label .qr-hint {
+  font-size:11px;
+  color:var(--ink-light);
+  margin-top:4px;
+}
+.qr-label .qr-hint a {
+  color:var(--gold);
+  text-decoration:none;
+}
+
+/* === 底部 === */
+.footer {
+  text-align:center;
+  padding:60px 20px 40px;
+  color:var(--ink-light);
+  font-size:12px;
+  letter-spacing:3px;
+  position:relative;
+}
+.footer::before {
+  content:'';
+  display:block;
+  width:60px; height:1px;
+  background:var(--gold);
+  margin:0 auto 20px;
+}
+.bottom-ornament {
+  height:4px;
+  background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--red) 50%,var(--gold) 80%,transparent 100%);
+}
+
+/* === Lightbox === */
+.lightbox {
+  display:none;
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,.92);
+  z-index:1000;
+  justify-content:center;
+  align-items:center;
+}
+.lightbox.active { display:flex; }
+.lightbox img {
+  max-width:90vw;
+  max-height:90vh;
+  object-fit:contain;
+  border:2px solid rgba(255,255,255,.1);
+}
+.lightbox-close {
+  position:absolute;
+  top:20px; right:30px;
+  color:white;
+  font-size:36px;
+  cursor:pointer;
+  opacity:.6;
+  transition:opacity .3s;
+}
+.lightbox-close:hover { opacity:1; }
+.lightbox-prev, .lightbox-next {
+  position:absolute;
+  top:50%;
+  color:white;
+  font-size:48px;
+  cursor:pointer;
+  opacity:.5;
+  transform:translateY(-50%);
+  transition:opacity .3s;
+  user-select:none;
+}
+.lightbox-prev { left:30px; }
+.lightbox-next { right:30px; }
+.lightbox-prev:hover, .lightbox-next:hover { opacity:1; }
+
+/* === 响应式 === */
+@media (max-width:768px) {
+  .hero h1 { font-size:28px; letter-spacing:8px; }
+  .gallery-grid.cols3, .gallery-grid.cols4 { grid-template-columns:repeat(2,1fr); }
+  .qr-section { flex-direction:column; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-ornament"></div>
+
+<!-- ── Hero ── -->
+<header class="hero">
+  <h1>李东醒</h1>
+  <p class="subtitle">作 品 集</p>
+  <div class="divider"></div>
+  <p class="brief">视觉设计 · 影像创作 · 活动策划</p>
+</header>
+
+<!-- ── 作品一：春夏秋冬 ── -->
+<section class="section">
+  <div class="section-header">
+    <div class="cn-title">计算机设计大赛</div>
+    <div class="en-title">National Computer Design Competition</div>
+  </div>
+
+  <div class="work-card" id="work1">
+    <div class="work-card-header">
+      <div class="work-num">作品一</div>
+      <h2>春夏秋冬</h2>
+      <span class="work-tag">平面设计</span>
+      <span class="work-tag">数字插画</span>
+      <div class="work-meta">2020 · 全国大学生计算机设计大赛 省级三等奖</div>
+    </div>
+    <div class="work-desc">
+      以中国传统建筑与优秀民族文化为核心命题，选取四季为叙事线索，将春、夏、秋、冬四时意象与四类代表性传统建筑进行视觉融合创作。<br>
+      春·江南水乡民居 — 烟雨朦胧中粉墙黛瓦，桃花点点，万物复苏；夏·苏州园林 — 曲径通幽处移步换景，碧荷映日，蝉鸣声声；秋·福建土楼 — 金稻环绕中圆形围屋，丰收喜悦；冬·西湖断桥残雪 — 雪霁初晴时桥影如练，寒梅傲立，静谧悠远。<br>
+      以传统水墨配色为基底，融入季节色调，以数字化手段激活传统文化表达。
+    </div>
+    <div class="gallery">
+      <div class="gallery-grid cols4">
+        <div class="gallery-item" onclick="openLightbox(this,0,'work1')">
+          <img src="works/春夏秋冬/春.jpg" alt="春·江南水乡">
+          <div class="caption">春 · 江南水乡</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this,1,'work1')">
+          <img src="works/春夏秋冬/夏.jpg" alt="夏·苏州园林">
+          <div class="caption">夏 · 苏州园林</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this,2,'work1')">
+          <img src="works/春夏秋冬/秋.jpg" alt="秋·福建土楼">
+          <div class="caption">秋 · 福建土楼</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this,3,'work1')">
+          <img src="works/春夏秋冬/冬.jpg" alt="冬·西湖断桥残雪">
+          <div class="caption">冬 · 西湖断桥残雪</div>
+        </div>
+      </div>
+    </div>
+    <div class="qr-section">
+      <div class="qr-code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://pan.baidu.com/s/1L0Ga6dZyu1j54hvSv1lXpw%3Fpwd%3Dmqf1&margin=2" alt="扫码查看作品" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23f0ede8%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 font-size=%2211%22 fill=%22%23888%22>QR</text></svg>'">
+      </div>
+      <div class="qr-label">
+        <div class="qr-title">扫码查看完整作品</div>
+        <div class="qr-hint">或访问：pan.baidu.com/s/1L0Ga6dZyu1j54hvSv1lXpw 提取码 mqf1</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 作品二：以史鉴汉字 ── -->
+  <div class="work-card" id="work2">
+    <div class="work-card-header">
+      <div class="work-num">作品二</div>
+      <h2>以史鉴汉字</h2>
+      <span class="work-tag">数字媒体</span>
+      <span class="work-tag">文化创意</span>
+      <div class="work-meta">2022 · 全国大学生计算机设计大赛 参赛作品</div>
+    </div>
+    <div class="work-desc">
+      以汉字文化为核心，通过数字媒体设计呈现汉字从象形文字到唐诗宋词的演变历程。<br>
+      象形文字 — 追溯汉字源头，日月山水，以画入字；文房四宝 — 笔、墨、纸、砚，承载千年书写文明；唐诗宋词 — 以视觉语言诠释古典诗词的意境之美。<br>
+      旨在用现代数字创作手法承载中华民族的汉字文化基因，让传统文化在数字化语境中焕发新生。
+    </div>
+    <div class="gallery">
+      <div class="gallery-grid cols3">
+        <div class="gallery-item" onclick="openLightbox(this,0,'work2')">
+          <img src="works/以史鉴汉字/象形文字.jpg" alt="象形文字">
+          <div class="caption">象形文字</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this,1,'work2')">
+          <img src="works/以史鉴汉字/文房四宝.jpg" alt="文房四宝">
+          <div class="caption">文房四宝</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this,2,'work2')">
+          <img src="works/以史鉴汉字/唐诗宋词.jpg" alt="唐诗宋词">
+          <div class="caption">唐诗宋词</div>
+        </div>
+      </div>
+    </div>
+    <div class="qr-section">
+      <div class="qr-code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://pan.baidu.com/s/1FqxB2hDQJtB8WBPSDFq9JQ%3Fpwd%3D2nhh&margin=2" alt="扫码查看作品" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23f0ede8%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 font-size=%2211%22 fill=%22%23888%22>QR</text></svg>'">
+      </div>
+      <div class="qr-label">
+        <div class="qr-title">扫码查看完整作品</div>
+        <div class="qr-hint">或访问：pan.baidu.com/s/1FqxB2hDQJtB8WBPSDFq9JQ 提取码 2nhh</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 作品三：诚信与感恩 ── -->
+  <div class="work-card" id="work3">
+    <div class="work-card-header">
+      <div class="work-num">作品三</div>
+      <h2>诚信与感恩</h2>
+      <span class="work-tag">心理微电影</span>
+      <span class="work-tag">影视创作</span>
+      <div class="work-meta">2021 · 校园心理健康主题展映作品</div>
+    </div>
+    <div class="work-desc">
+      以高校贫困生群体为主题的心理健康微电影，聚焦经济困难学生在学业压力、社交融入与自我认同中的真实困境。<br>
+      担任全片分镜脚本设计、主摄影、后期剪辑与配乐——采用手持跟拍与固定长镜头结合的方式，以写实影像风格呈现人物内心状态；选取钢琴与弦乐为主的原创配乐方案，以低饱和色调统一全片视觉情绪。<br>
+      成片在校级心理健康主题展映中播出，获师生正面反馈，被学院公众号推荐报道。
+    </div>
+    <div class="video-wrapper">
+      <video controls preload="metadata" poster="">
+        <source src="works/诚信与感恩/73c53748eb26eb4ec928726e896d5be4.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。请扫码查看。
+      </video>
+    </div>
+    <div class="qr-section">
+      <div class="qr-code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://pan.baidu.com/s/1DImfr7dH_eSn8Au0ZJpaUg%3Fpwd%3Dpy3a&margin=2" alt="扫码查看视频" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23f0ede8%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 font-size=%2211%22 fill=%22%23888%22>QR</text></svg>'">
+      </div>
+      <div class="qr-label">
+        <div class="qr-title">扫码观看完整微电影</div>
+        <div class="qr-hint">或访问：pan.baidu.com/s/1DImfr7dH_eSn8Au0ZJpaUg 提取码 py3a</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 作品四：IT嘉年华 ── -->
+  <div class="work-card" id="work4">
+    <div class="work-card-header">
+      <div class="work-num">作品四</div>
+      <h2>郑轻双创 IT 嘉年华</h2>
+      <span class="work-tag">展板设计</span>
+      <span class="work-tag">活动策划</span>
+      <div class="work-meta">2021 · 郑州轻工业大学创新创业办公室</div>
+    </div>
+    <div class="work-desc">
+      为校级创新创业 IT 嘉年华活动设计系列宣传展板，承担活动整体视觉统筹。<br>
+      从主视觉定调到各版块展板风格统一，运用 Photoshop 与 Illustrator 完成全部设计输出，兼顾活动现场的信息传达效率与视觉吸引力。<br>
+      活动为校级规模，覆盖多个学院，展板作为活动核心视觉资产，在校园多处同步展出。
+    </div>
+    <div class="gallery">
+      <div class="gallery-grid cols2">
+        <div class="gallery-item" onclick="openLightbox(this,0,'work4')">
+          <img src="works/IT嘉年华/3345C46D9ABC7F2955EAE6B2CA33CA6E.jpg" alt="IT嘉年华展板1">
+          <div class="caption">IT 嘉年华 · 展板设计</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this,1,'work4')">
+          <img src="works/IT嘉年华/4B635CB3DCD52570B8B49F6C26445B3D.jpg" alt="IT嘉年华展板2">
+          <div class="caption">IT 嘉年华 · 展板设计</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this,2,'work4')">
+          <img src="works/IT嘉年华/A348BA45C5019BF100A669D83451BC8D.jpg" alt="IT嘉年华展板3">
+          <div class="caption">IT 嘉年华 · 展板设计</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this,3,'work4')">
+          <img src="works/IT嘉年华/Image_1782695083880_156.jpg" alt="IT嘉年华展板全景">
+          <div class="caption">IT 嘉年华 · 展板全景</div>
+        </div>
+      </div>
+    </div>
+    <div class="qr-section">
+      <div class="qr-code">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://pan.baidu.com/s/1ch0tdbjhTuF1tQX4X6G7pQ%3Fpwd%3Dghcw&margin=2" alt="扫码查看作品" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23f0ede8%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 font-size=%2211%22 fill=%22%23888%22>QR</text></svg>'">
+      </div>
+      <div class="qr-label">
+        <div class="qr-title">扫码查看完整作品</div>
+        <div class="qr-hint">或访问：pan.baidu.com/s/1ch0tdbjhTuF1tQX4X6G7pQ 提取码 ghcw</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <p>李东醒 · 作品集 · 2026</p>
+  <p style="margin-top:4px;font-size:11px;color:var(--gold);">视觉设计 · 影像创作 · 活动策划</p>
+</footer>
+<div class="bottom-ornament"></div>
+
+<!-- ── Lightbox ── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <span class="lightbox-close" onclick="closeLightboxDirect()">&times;</span>
+  <span class="lightbox-prev" onclick="event.stopPropagation();navigateLightbox(-1)">&#8249;</span>
+  <img id="lightbox-img" src="" alt="">
+  <span class="lightbox-next" onclick="event.stopPropagation();navigateLightbox(1)">&#8250;</span>
+</div>
+
+<script>
+// 全局 lightbox 状态
+var currentWork = '';
+var currentIndex = 0;
+var currentImages = [];
+
+function openLightbox(el, index, workId) {
+  currentWork = workId;
+  currentIndex = index;
+  var card = document.getElementById(workId);
+  currentImages = Array.from(card.querySelectorAll('.gallery-item img'));
+  showLightboxImage(index);
+  document.getElementById('lightbox').classList.add('active');
+}
+function showLightboxImage(index) {
+  currentIndex = index;
+  var img = document.getElementById('lightbox-img');
+  img.src = currentImages[index].src;
+  img.alt = currentImages[index].alt;
+}
+function navigateLightbox(dir) {
+  var newIdx = currentIndex + dir;
+  if (newIdx < 0) newIdx = currentImages.length - 1;
+  if (newIdx >= currentImages.length) newIdx = 0;
+  showLightboxImage(newIdx);
+}
+function closeLightbox(e) {
+  if (e && e.target.tagName === 'IMG') return;
+  document.getElementById('lightbox').classList.remove('active');
+}
+function closeLightboxDirect() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('active')) return;
+  if (e.key === 'Escape') lb.classList.remove('active');
+  if (e.key === 'ArrowLeft') navigateLightbox(-1);
+  if (e.key === 'ArrowRight') navigateLightbox(1);
+});
+</script>
+</body>
+</html>
